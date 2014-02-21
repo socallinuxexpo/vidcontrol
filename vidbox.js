@@ -16,6 +16,8 @@ function getptz(cam){
         console.log("query: " + parts[1]);
         lastValues[i] = parts[1]
       }
+      $(".slider-tilt").slider("value", TILT_MAX - lastValues[TILT_ID]);
+      $(".slider-pan").slider("value", PAN_MAX - lastValues[PAN_ID]);
     }
   });
 }
@@ -58,6 +60,19 @@ else {
   );
 }
 $(function() {
+  $(".up_btn").click(function(){
+    setptz('1', 'tilt', 'down')
+  });
+  $(".down_btn").click(function(){
+    setptz('1', 'tilt', 'up')
+  });
+  $(".left_btn").click(function(){
+    setptz('1', 'pan', 'up')
+  });
+  $(".right_btn").click(function(){
+    setptz('1', 'pan', 'down')
+  });
+
   $( ".pan" ).spinner({
     min: PAN_MIN,
     max: PAN_MAX,
@@ -88,7 +103,7 @@ $(function() {
       direction = 'down'
     }
     setptz(1,'pan', direction, curr);
-    $(".slider-pan").slider("value", curr)
+    $(".slider-pan").slider("value", PAN_MAX - curr)
   });
 
   $(".tilt").change(function() {
@@ -102,7 +117,7 @@ $(function() {
       direction = 'down'
     }
     setptz(1,'tilt', direction, curr);
-    $(".slider-tilt").slider("value", curr)
+    $(".slider-tilt").slider("value", TILT_MAX - curr)
   });
 
 
