@@ -6,7 +6,7 @@ function logArrayElements(element, index, array) {
 function getptz(cam){
   $.ajax({
     type: "GET",
-    url: "http://"+ CAM_IP +"/x/1/cgi-bin/ptz.cgi?query=ptz",
+    url: "https://"+ CAM_IP +"/x/1/cgi-bin/ptz.cgi?query=ptz",
     success: function(data) {
       ptz = data.trim().split("\n");
       for(i=0; i<ptz.length; i++) {
@@ -49,7 +49,7 @@ else {
 }
   console.log("current: " + oldVal + "direction: " + direction + " request: " + value)
   $.get(
-    "http://"+CAM_IP+"/x/1/cgi-bin/ptz.cgi?move"+type+"="+value,
+    "https://"+CAM_IP+"/x/1/cgi-bin/ptz.cgi?move"+type+"="+value,
     function(data) {
       delay = 1000;
       if(type == 'zoom'){
@@ -59,7 +59,7 @@ else {
     }
   );
 }
-$(function() {
+function vidsetup() {
   $(".up_btn").click(function(){
     setptz('1', 'tilt', 'down')
   });
@@ -142,7 +142,7 @@ $(function() {
   getptz('1');
   setTimeout("initSliders()", 1000)
 
-});
+}
 
 function initSliders(){
   $(".slider-pan").slider({
